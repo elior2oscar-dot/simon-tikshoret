@@ -28,6 +28,7 @@ export function FlyerPromo() {
             className="brand-logo"
             width={220}
             height={220}
+            decoding="async"
           />
           <h1 className="brand-he">{BRAND_HE}</h1>
           <p className="brand-en">{BRAND_EN.toUpperCase()}</p>
