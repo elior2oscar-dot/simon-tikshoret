@@ -1,32 +1,53 @@
 import type { ReactNode } from "react";
 import type { ServiceId } from "../data/services";
 
-/** Fiber optic cable logo — jacket, cladding, glowing core + cable curve */
+/**
+ * Fiber optic cable logo inspired by multi-core cable:
+ * black jacket, silver collar, colored buffer tubes, glowing tips.
+ */
 export function BrandLogo() {
+  const tubes = [
+    { x: 78, y: 34, color: "#FACC15" },
+    { x: 90, y: 42, color: "#EF4444" },
+    { x: 94, y: 56, color: "#22C55E" },
+    { x: 88, y: 70, color: "#38BDF8" },
+    { x: 76, y: 78, color: "#EC4899" },
+    { x: 64, y: 74, color: "#F97316" },
+  ] as const;
+
   return (
-    <svg className="m-logo" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+    <svg className="m-logo" viewBox="0 0 140 120" fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#334155" />
-          <stop offset="100%" stopColor="#0f172a" />
+        <linearGradient id="jacketGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#111827" />
+          <stop offset="45%" stopColor="#1f2937" />
+          <stop offset="100%" stopColor="#0b1220" />
         </linearGradient>
-        <linearGradient id="cableBody" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#64748b" />
-          <stop offset="50%" stopColor="#1e293b" />
-          <stop offset="100%" stopColor="#0f172a" />
+        <linearGradient id="jacketShine" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.45" />
+          <stop offset="40%" stopColor="#94a3b8" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0.35" />
         </linearGradient>
-        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+        <linearGradient id="collarGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f8fafc" />
+          <stop offset="40%" stopColor="#cbd5e1" />
+          <stop offset="100%" stopColor="#64748b" />
+        </linearGradient>
+        <radialGradient id="coreBurst" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="35%" stopColor="#7DF9FF" />
-          <stop offset="100%" stopColor="#00E5FF" />
+          <stop offset="35%" stopColor="#E0F2FE" />
+          <stop offset="70%" stopColor="#38BDF8" />
+          <stop offset="100%" stopColor="#0284C7" stopOpacity="0" />
         </radialGradient>
-        <linearGradient id="lightTrail" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
-          <stop offset="50%" stopColor="#00E5FF" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#F5D76E" stopOpacity="0.85" />
-        </linearGradient>
-        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="2.2" result="b" />
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.4" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <filter id="strongGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="3.5" result="b" />
           <feMerge>
             <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
@@ -34,43 +55,82 @@ export function BrandLogo() {
         </filter>
       </defs>
 
-      {/* Curved fiber cable body */}
+      {/* Black outer jacket (U-curve) */}
       <path
-        d="M18 98 C22 72, 28 52, 48 42"
-        stroke="url(#cableBody)"
-        strokeWidth="14"
+        d="M8 88 C10 58, 18 34, 42 28 C52 25, 58 32, 60 42"
+        stroke="url(#jacketGrad)"
+        strokeWidth="22"
         strokeLinecap="round"
         fill="none"
       />
       <path
-        d="M18 98 C22 72, 28 52, 48 42"
-        stroke="#94a3b8"
-        strokeWidth="5"
+        d="M8 88 C10 58, 18 34, 42 28 C52 25, 58 32, 60 42"
+        stroke="url(#jacketShine)"
+        strokeWidth="10"
         strokeLinecap="round"
         fill="none"
-        opacity="0.35"
-      />
-      {/* Light inside the cable */}
-      <path
-        d="M20 96 C24 72, 30 54, 48 44"
-        stroke="url(#lightTrail)"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        fill="none"
-        filter="url(#glow)"
       />
 
-      {/* Cable end / tip facing camera */}
-      <circle cx="68" cy="40" r="28" fill="url(#jacket)" stroke="#F5D76E" strokeWidth="2.5" filter="url(#glow)" />
-      <circle cx="68" cy="40" r="21" fill="#1e293b" stroke="#475569" strokeWidth="2" />
-      <circle cx="68" cy="40" r="14" fill="#0b1728" stroke="#38BDF8" strokeWidth="2.2" />
-      <circle cx="68" cy="40" r="7" fill="url(#coreGlow)" filter="url(#glow)" />
-      <circle cx="68" cy="40" r="2.6" fill="#ffffff" />
+      {/* Silver ribbed coupling collar */}
+      <g transform="translate(52 34) rotate(18)">
+        <rect x="0" y="0" width="16" height="28" rx="4" fill="url(#collarGrad)" />
+        <path d="M3 5h10M3 10h10M3 15h10M3 20h10" stroke="#475569" strokeWidth="1.2" opacity="0.7" />
+        <rect x="1" y="1" width="14" height="6" rx="2" fill="#ffffff" opacity="0.35" />
+      </g>
 
-      {/* Small sparkles of optic light */}
-      <circle cx="92" cy="22" r="2" fill="#00E5FF" opacity="0.9" />
-      <circle cx="98" cy="34" r="1.4" fill="#F5D76E" opacity="0.85" />
-      <circle cx="88" cy="14" r="1.2" fill="#7DF9FF" opacity="0.7" />
+      {/* Colored buffer tubes fanning out */}
+      {tubes.map((tube, i) => {
+        const startX = 66;
+        const startY = 48;
+        return (
+          <g key={tube.color}>
+            <line
+              x1={startX}
+              y1={startY}
+              x2={tube.x - 4}
+              y2={tube.y}
+              stroke={tube.color}
+              strokeWidth="5.5"
+              strokeLinecap="round"
+              opacity="0.95"
+            />
+            <line
+              x1={startX}
+              y1={startY}
+              x2={tube.x - 4}
+              y2={tube.y}
+              stroke="#fff"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              opacity="0.25"
+            />
+            {/* thin glass fiber beyond tube */}
+            <line
+              x1={tube.x - 2}
+              y1={tube.y}
+              x2={tube.x + 10 + (i % 2)}
+              y2={tube.y + (i - 2.5) * 1.5}
+              stroke="#7DD3FC"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              opacity="0.9"
+              filter="url(#softGlow)"
+            />
+            <circle
+              cx={tube.x + 10 + (i % 2)}
+              cy={tube.y + (i - 2.5) * 1.5}
+              r="2.1"
+              fill="#E0F2FE"
+              filter="url(#softGlow)"
+            />
+          </g>
+        );
+      })}
+
+      {/* Central bright glowing fiber tip */}
+      <circle cx="78" cy="50" r="16" fill="url(#coreBurst)" filter="url(#strongGlow)" />
+      <circle cx="78" cy="50" r="5.5" fill="#ffffff" filter="url(#strongGlow)" />
+      <circle cx="78" cy="50" r="2.2" fill="#F0F9FF" />
     </svg>
   );
 }

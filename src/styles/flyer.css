@@ -69,18 +69,18 @@
 .m-logo-wrap {
   display: grid;
   place-items: center;
-  width: 5.5rem;
+  width: 6.25rem;
   height: 5.5rem;
   margin: 0 auto 1rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.12), transparent 70%);
+  border-radius: 20px;
+  background: radial-gradient(circle at 60% 45%, rgba(56, 189, 248, 0.16), transparent 70%);
 }
 
 .m-logo {
-  width: 4.75rem;
-  height: 4.75rem;
+  width: 6rem;
+  height: 5.15rem;
   display: block;
-  filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.4));
+  filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.35));
 }
 
 .m-header h1 {
