@@ -61,6 +61,42 @@
   animation-delay: 2.6s;
 }
 
+.neon-mid {
+  width: 260px;
+  height: 260px;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, transparent 68%);
+  animation: neon-pulse-mid 8s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.neon-bottom {
+  width: 240px;
+  height: 240px;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 35% 40%, rgba(0, 210, 255, 0.28) 0%, transparent 60%),
+    radial-gradient(circle at 70% 55%, rgba(236, 72, 153, 0.16) 0%, transparent 55%);
+  animation: neon-pulse-center 7.5s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+@keyframes neon-pulse-mid {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
 @keyframes neon-pulse {
   0%,
   100% {
@@ -175,6 +211,25 @@
 }
 
 /* Accordion cards */
+.cards-section {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 0.55rem;
+  margin: 0 -0.25rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 20%, rgba(0, 210, 255, 0.1), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 80%, rgba(236, 72, 153, 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 10% 60%, rgba(250, 204, 21, 0.05), transparent 50%),
+    rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(0, 210, 255, 0.12);
+  box-shadow:
+    inset 0 0 40px rgba(0, 210, 255, 0.04),
+    0 0 32px rgba(0, 210, 255, 0.06);
+}
+
 .cards {
   list-style: none;
   margin: 0;
@@ -187,20 +242,24 @@
 
 .card {
   border-radius: 16px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(0, 210, 255, 0.06), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(0, 210, 255, 0.18);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
   transition:
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card.is-open {
-  background: var(--surface-open);
-  border-color: var(--border-open);
-  box-shadow: 0 0 24px rgba(0, 210, 255, 0.12);
+  background: linear-gradient(145deg, rgba(0, 210, 255, 0.12), rgba(236, 72, 153, 0.05));
+  border-color: rgba(0, 210, 255, 0.5);
+  box-shadow:
+    0 0 28px rgba(0, 210, 255, 0.2),
+    0 0 12px rgba(236, 72, 153, 0.08);
 }
 
 .card-btn {
@@ -224,14 +283,18 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  background: rgba(0, 210, 255, 0.08);
-  border: 1px solid rgba(0, 210, 255, 0.22);
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  box-shadow:
+    0 0 14px rgba(0, 210, 255, 0.28),
+    inset 0 0 10px rgba(0, 210, 255, 0.08);
 }
 
 .m-service-icon {
   width: 1.25rem;
   height: 1.25rem;
   color: var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.65));
 }
 
 .card-label {
@@ -255,6 +318,7 @@
 .m-chevron.is-open {
   transform: rotate(180deg);
   color: var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.7));
 }
 
 .card-panel {
@@ -269,7 +333,7 @@
   list-style: none;
   margin: 0;
   padding: 0.75rem 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(0, 210, 255, 0.18);
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
@@ -278,7 +342,8 @@
 .card-options li {
   padding: 0.45rem 0.75rem;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 210, 255, 0.05);
+  border: 1px solid rgba(0, 210, 255, 0.1);
   font-size: 0.9rem;
   font-weight: 600;
   color: #d4d4d8;
@@ -286,8 +351,38 @@
 
 /* CTA footer */
 .cta {
-  margin-top: 1.6rem;
+  position: relative;
+  margin-top: 1.35rem;
   text-align: center;
+  padding: 1.15rem 0.75rem 0.25rem;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 30%, rgba(0, 210, 255, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 50% at 20% 80%, rgba(37, 211, 102, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 85% 70%, rgba(236, 72, 153, 0.08), transparent 55%),
+    rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 210, 255, 0.16);
+  box-shadow:
+    inset 0 0 36px rgba(0, 210, 255, 0.05),
+    0 0 28px rgba(0, 210, 255, 0.08);
+}
+
+.cta-glow {
+  position: absolute;
+  inset: 10% 15%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.2), transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-label,
+.cta-phone,
+.cta-actions {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-label {
@@ -309,6 +404,9 @@
   unicode-bidi: embed;
   letter-spacing: 0.04em;
   line-height: 1.1;
+  text-shadow:
+    0 0 18px rgba(0, 210, 255, 0.45),
+    0 0 36px rgba(0, 210, 255, 0.2);
 }
 
 .cta-actions {
@@ -344,13 +442,17 @@
 .btn-call {
   background: linear-gradient(180deg, #33dcff 0%, var(--cyan) 45%, var(--cyan-deep) 100%);
   color: #001018;
-  box-shadow: 0 8px 20px rgba(0, 210, 255, 0.25);
+  box-shadow:
+    0 0 22px rgba(0, 210, 255, 0.45),
+    0 8px 20px rgba(0, 210, 255, 0.28);
 }
 
 .btn-wa {
   background: linear-gradient(180deg, #3ddc76 0%, var(--whatsapp) 100%);
   color: #fff;
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+  box-shadow:
+    0 0 22px rgba(37, 211, 102, 0.4),
+    0 8px 20px rgba(37, 211, 102, 0.28);
 }
 
 .btn:active {

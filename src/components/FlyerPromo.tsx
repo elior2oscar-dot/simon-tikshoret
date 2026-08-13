@@ -24,6 +24,8 @@ export function FlyerPromo() {
         <span className="neon-orb neon-cyan" />
         <span className="neon-orb neon-magenta" />
         <span className="neon-orb neon-gold" />
+        <span className="neon-orb neon-mid" />
+        <span className="neon-orb neon-bottom" />
       </div>
       <div className="page-inner">
         <header className="brand">
@@ -41,48 +43,51 @@ export function FlyerPromo() {
           <p className="brand-en">{BRAND_EN.toUpperCase()}</p>
         </header>
 
-        <ul className="cards">
-          {services.map((item) => {
-            const isOpen = openId === item.id;
-            const panelId = `panel-${item.id}`;
-            const btnId = `btn-${item.id}`;
+        <section className="cards-section">
+          <ul className="cards">
+            {services.map((item) => {
+              const isOpen = openId === item.id;
+              const panelId = `panel-${item.id}`;
+              const btnId = `btn-${item.id}`;
 
-            return (
-              <li key={item.id} className={`card${isOpen ? " is-open" : ""}`}>
-                <button
-                  type="button"
-                  id={btnId}
-                  className="card-btn"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => toggle(item.id)}
-                >
-                  <span className="card-icon">
-                    <ServiceIcon id={item.id} />
-                  </span>
-                  <span className="card-label">{item.label}</span>
-                  <ChevronIcon open={isOpen} />
-                </button>
+              return (
+                <li key={item.id} className={`card${isOpen ? " is-open" : ""}`}>
+                  <button
+                    type="button"
+                    id={btnId}
+                    className="card-btn"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => toggle(item.id)}
+                  >
+                    <span className="card-icon">
+                      <ServiceIcon id={item.id} />
+                    </span>
+                    <span className="card-label">{item.label}</span>
+                    <ChevronIcon open={isOpen} />
+                  </button>
 
-                <div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={btnId}
-                  className="card-panel"
-                  hidden={!isOpen}
-                >
-                  <ul className="card-options">
-                    {item.options.map((option) => (
-                      <li key={option}>{option}</li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={btnId}
+                    className="card-panel"
+                    hidden={!isOpen}
+                  >
+                    <ul className="card-options">
+                      {item.options.map((option) => (
+                        <li key={option}>{option}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
 
         <footer className="cta">
+          <div className="cta-glow" aria-hidden="true" />
           <p className="cta-label">{CTA_LABEL}</p>
           <a className="cta-phone" href={`tel:${PHONE_TEL}`}>
             {PHONE_DISPLAY}
