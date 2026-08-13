@@ -9,7 +9,93 @@ import {
   services,
   type ServiceId,
 } from "../data/services";
-import { BrandLogo, ChevronIcon, ServiceIcon } from "./FlatIcons";
+import { ChevronIcon, ServiceIcon } from "./FlatIcons";
+
+function CircuitBackdrop() {
+  return (
+    <svg
+      className="hero-circuit"
+      viewBox="0 0 400 520"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="cLine" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#1d4ed8" stopOpacity="0" />
+          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {[
+        "M20 80 H120 V160 H220",
+        "M380 40 H280 V120 H180 V200",
+        "M40 280 H140 V360 H260",
+        "M360 300 H260 V400 H160",
+        "M80 440 H200 V500",
+        "M320 460 H200",
+        "M100 20 V100 H180",
+        "M300 60 V140 H360",
+      ].map((d) => (
+        <path key={d} d={d} stroke="url(#cLine)" strokeWidth="1.2" fill="none" />
+      ))}
+      {[
+        [120, 80],
+        [220, 160],
+        [280, 120],
+        [140, 280],
+        [260, 360],
+        [200, 440],
+        [180, 100],
+        [360, 140],
+        [160, 400],
+      ].map(([x, y]) => (
+        <circle key={`${x}-${y}`} cx={x} cy={y} r="3" fill="#38bdf8" opacity="0.55" />
+      ))}
+    </svg>
+  );
+}
+
+function FiberBar() {
+  return (
+    <svg className="hero-fiber-bar" viewBox="0 0 320 36" aria-hidden="true">
+      <defs>
+        <linearGradient id="barCore" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#a855f7" />
+          <stop offset="20%" stopColor="#22d3ee" />
+          <stop offset="50%" stopColor="#e2e8f0" />
+          <stop offset="80%" stopColor="#22d3ee" />
+          <stop offset="100%" stopColor="#ec4899" />
+        </linearGradient>
+        <filter id="barGlow">
+          <feGaussianBlur stdDeviation="2.5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path
+        d="M16 18 C60 8, 110 28, 160 18 S260 8, 304 18"
+        stroke="#1e293b"
+        strokeWidth="10"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M16 18 C60 8, 110 28, 160 18 S260 8, 304 18"
+        stroke="url(#barCore)"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        fill="none"
+        filter="url(#barGlow)"
+      />
+      <circle cx="16" cy="18" r="5" fill="#c084fc" filter="url(#barGlow)" />
+      <circle cx="304" cy="18" r="5" fill="#22d3ee" filter="url(#barGlow)" />
+      <circle cx="16" cy="18" r="2" fill="#fff" />
+      <circle cx="304" cy="18" r="2" fill="#fff" />
+    </svg>
+  );
+}
 
 export function FlyerPromo() {
   const [openId, setOpenId] = useState<ServiceId | null>(null);
@@ -21,64 +107,26 @@ export function FlyerPromo() {
   return (
     <main className="m-shell">
       <article className="m-flyer" aria-label="סימון תקשורת">
-        <svg
-          className="m-bg-lines"
-          viewBox="0 0 360 640"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <defs>
-            <linearGradient id="fiberGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#00e5ff" stopOpacity="0" />
-              <stop offset="50%" stopColor="#00e5ff" stopOpacity="0.55" />
-              <stop offset="100%" stopColor="#00e5ff" stopOpacity="0" />
-            </linearGradient>
-            <filter id="fiberGlow" x="-20%" y="-200%" width="140%" height="500%">
-              <feGaussianBlur stdDeviation="1.2" result="b" />
-              <feMerge>
-                <feMergeNode in="b" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <path
-            d="M-40 130 L400 40"
-            stroke="url(#fiberGrad)"
-            strokeWidth="1.2"
-            filter="url(#fiberGlow)"
-          />
-          <path
-            d="M-40 300 L400 220"
-            stroke="url(#fiberGrad)"
-            strokeWidth="1"
-            opacity="0.7"
-            filter="url(#fiberGlow)"
-          />
-          <path
-            d="M-40 470 L400 390"
-            stroke="url(#fiberGrad)"
-            strokeWidth="1.1"
-            opacity="0.85"
-            filter="url(#fiberGlow)"
-          />
-          <path
-            d="M-20 560 L380 520"
-            stroke="url(#fiberGrad)"
-            strokeWidth="0.9"
-            opacity="0.5"
-            filter="url(#fiberGlow)"
-          />
-        </svg>
+        <section className="hero">
+          <CircuitBackdrop />
+          <div className="hero-glow hero-glow-a" aria-hidden="true" />
+          <div className="hero-glow hero-glow-b" aria-hidden="true" />
 
-        <div className="m-vignette" aria-hidden="true" />
-
-        <header className="m-header">
-          <div className="m-logo-wrap">
-            <BrandLogo />
+          <div className="hero-mark">
+            <img
+              src="/images/simon-hero-logo.png"
+              alt="סימון תקשורת"
+              className="hero-logo"
+              width={280}
+              height={280}
+            />
           </div>
-          <h1>{BRAND_HE}</h1>
-          <p className="m-en">{BRAND_EN}</p>
-        </header>
+
+          <h1 className="hero-title">{BRAND_HE}</h1>
+          <p className="hero-en">{BRAND_EN.toUpperCase()}</p>
+          <FiberBar />
+          <p className="hero-tag">תשתיות תקשורת • מתח נמוך • מערכות מתקדמות</p>
+        </section>
 
         <ul className="m-services">
           {services.map((item, index) => {
@@ -90,7 +138,7 @@ export function FlyerPromo() {
               <li
                 key={item.id}
                 className={`m-service${isOpen ? " is-open" : ""}`}
-                style={{ animationDelay: `${0.06 + index * 0.04}s` }}
+                style={{ animationDelay: `${0.08 + index * 0.04}s` }}
               >
                 <button
                   type="button"
