@@ -7,11 +7,91 @@
 }
 
 .page {
+  position: relative;
   display: flex;
   justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -8%, rgba(0, 210, 255, 0.16), transparent 58%),
+    radial-gradient(ellipse 55% 40% at 100% 35%, rgba(236, 72, 153, 0.1), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 0% 70%, rgba(250, 204, 21, 0.07), transparent 50%),
+    #000;
+}
+
+.neon-ambience {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.neon-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.85;
+  animation: neon-pulse 7s ease-in-out infinite;
+}
+
+.neon-cyan {
+  width: 280px;
+  height: 280px;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.45) 0%, transparent 70%);
+}
+
+.neon-magenta {
+  width: 200px;
+  height: 200px;
+  top: 18%;
+  right: -70px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.32) 0%, transparent 70%);
+  animation-delay: 1.4s;
+}
+
+.neon-gold {
+  width: 180px;
+  height: 180px;
+  bottom: 22%;
+  left: -60px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.22) 0%, transparent 70%);
+  animation-delay: 2.6s;
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08);
+  }
+}
+
+.neon-cyan {
+  animation-name: neon-pulse-center;
+}
+
+@keyframes neon-pulse-center {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1.08);
+  }
 }
 
 .page-inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 430px;
   min-height: 100dvh;
@@ -31,18 +111,46 @@
 .brand {
   text-align: center;
   margin-bottom: 1.5rem;
+  background: transparent;
+}
+
+.brand-glow {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1rem;
+  width: min(68vw, 240px);
+}
+
+.brand-glow::before {
+  content: "";
+  position: absolute;
+  inset: 8% 12%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(0, 210, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 70% 25%, rgba(236, 72, 153, 0.22), transparent 50%),
+    radial-gradient(circle at 55% 60%, rgba(250, 204, 21, 0.14), transparent 55%);
+  filter: blur(18px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .brand-logo {
+  position: relative;
+  z-index: 1;
   width: min(58vw, 200px);
   height: auto;
   display: block;
-  margin: 0 auto 1rem;
+  margin: 0 auto;
   background: transparent !important;
   border: none;
   border-radius: 0;
   box-shadow: none;
-  filter: drop-shadow(0 8px 26px rgba(0, 210, 255, 0.22));
+  filter:
+    drop-shadow(0 0 14px rgba(0, 210, 255, 0.45))
+    drop-shadow(0 0 28px rgba(236, 72, 153, 0.18))
+    drop-shadow(0 10px 24px rgba(0, 0, 0, 0.4));
 }
 
 .brand-he {
@@ -53,6 +161,7 @@
   letter-spacing: -0.03em;
   line-height: 1.15;
   color: #fff;
+  text-shadow: 0 0 24px rgba(0, 210, 255, 0.28);
 }
 
 .brand-en {
@@ -62,6 +171,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   color: var(--gold);
+  text-shadow: 0 0 16px rgba(250, 204, 21, 0.25);
 }
 
 /* Accordion cards */
@@ -90,6 +200,7 @@
 .card.is-open {
   background: var(--surface-open);
   border-color: var(--border-open);
+  box-shadow: 0 0 24px rgba(0, 210, 255, 0.12);
 }
 
 .card-btn {
@@ -259,9 +370,13 @@
 }
 
 @media (max-height: 720px) {
+  .brand-glow {
+    width: min(52vw, 180px);
+    margin-bottom: 0.65rem;
+  }
+
   .brand-logo {
     width: min(42vw, 150px);
-    margin-bottom: 0.65rem;
   }
 
   .brand {
@@ -278,6 +393,11 @@
 
   .cta-phone {
     font-size: 1.85rem;
+  }
+
+  .neon-orb {
+    filter: blur(48px);
+    opacity: 0.65;
   }
 }
 

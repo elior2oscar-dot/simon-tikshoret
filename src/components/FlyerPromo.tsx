@@ -20,16 +20,23 @@ export function FlyerPromo() {
 
   return (
     <main className="page">
+      <div className="neon-ambience" aria-hidden="true">
+        <span className="neon-orb neon-cyan" />
+        <span className="neon-orb neon-magenta" />
+        <span className="neon-orb neon-gold" />
+      </div>
       <div className="page-inner">
         <header className="brand">
-          <img
-            src="/images/simon-hero-logo.png"
-            alt="סימון תקשורת"
-            className="brand-logo"
-            width={220}
-            height={220}
-            decoding="async"
-          />
+          <div className="brand-glow">
+            <img
+              src="/images/simon-hero-logo.png"
+              alt="סימון תקשורת"
+              className="brand-logo"
+              width={220}
+              height={220}
+              decoding="async"
+            />
+          </div>
           <h1 className="brand-he">{BRAND_HE}</h1>
           <p className="brand-en">{BRAND_EN.toUpperCase()}</p>
         </header>
