@@ -1,0 +1,14 @@
+:root {
+  --bg: #040a12;
+  --bg-2: #0b1728;
+  --cyan: #00e5ff;
+  --cyan-dim: rgba(0, 229, 255, 0.14);
+  --gold: #f0d06a;
+  --text: #ffffff;
+  --muted: #9fb0c6;
+  --whatsapp: #25d366;
+  --font-display: "Rubik", "Heebo", sans-serif;
+  --font-body: "Heebo", sans-serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
