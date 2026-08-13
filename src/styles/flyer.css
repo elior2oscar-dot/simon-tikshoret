@@ -213,10 +213,9 @@
 /* Accordion cards */
 .cards-section {
   position: relative;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0.85rem 0.55rem;
+  padding: 0.75rem 0.55rem;
   margin: 0 -0.25rem;
   border-radius: 22px;
   background:
@@ -237,7 +236,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  flex: 1;
 }
 
 .card {
@@ -352,7 +350,7 @@
 /* CTA footer */
 .cta {
   position: relative;
-  margin-top: 1.35rem;
+  margin-top: 1rem;
   text-align: center;
   padding: 1.15rem 0.75rem 0.25rem;
   border-radius: 22px;
