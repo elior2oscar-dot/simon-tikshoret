@@ -1,22 +1,32 @@
 import type { ReactNode } from "react";
 import type { ServiceId } from "../data/services";
 
-/** Fiber-optic cable cross-section logo */
+/** Fiber optic cable logo — jacket, cladding, glowing core + cable curve */
 export function BrandLogo() {
   return (
     <svg className="m-logo" viewBox="0 0 120 120" fill="none" aria-hidden="true">
       <defs>
-        <radialGradient id="fiberCore" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#E0FFFF" />
-          <stop offset="45%" stopColor="#00E5FF" />
-          <stop offset="100%" stopColor="#0284C7" />
-        </radialGradient>
-        <linearGradient id="fiberRing" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#7DF9FF" />
-          <stop offset="100%" stopColor="#F5D76E" />
+        <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#334155" />
+          <stop offset="100%" stopColor="#0f172a" />
         </linearGradient>
-        <filter id="fiberLogoGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.4" result="b" />
+        <linearGradient id="cableBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#64748b" />
+          <stop offset="50%" stopColor="#1e293b" />
+          <stop offset="100%" stopColor="#0f172a" />
+        </linearGradient>
+        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="35%" stopColor="#7DF9FF" />
+          <stop offset="100%" stopColor="#00E5FF" />
+        </radialGradient>
+        <linearGradient id="lightTrail" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#00E5FF" stopOpacity="0" />
+          <stop offset="50%" stopColor="#00E5FF" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#F5D76E" stopOpacity="0.85" />
+        </linearGradient>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="2.2" result="b" />
           <feMerge>
             <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
@@ -24,40 +34,43 @@ export function BrandLogo() {
         </filter>
       </defs>
 
-      {/* outer jacket */}
-      <circle
-        cx="60"
-        cy="60"
-        r="46"
-        fill="#0B1728"
-        stroke="url(#fiberRing)"
-        strokeWidth="3"
-        filter="url(#fiberLogoGlow)"
-      />
-      <circle cx="60" cy="60" r="38" fill="#132338" stroke="#1E3A5F" strokeWidth="2" />
-
-      {/* cladding ring */}
-      <circle cx="60" cy="60" r="26" fill="#0A1628" stroke="#38BDF8" strokeWidth="2.5" opacity="0.9" />
-
-      {/* glowing core */}
-      <circle cx="60" cy="60" r="12" fill="url(#fiberCore)" filter="url(#fiberLogoGlow)" />
-      <circle cx="60" cy="60" r="5" fill="#F8FAFC" opacity="0.9" />
-
-      {/* light rays suggesting optic signal */}
+      {/* Curved fiber cable body */}
       <path
-        d="M60 14v12M60 94v12M14 60h12M94 60h12"
-        stroke="#00E5FF"
-        strokeWidth="2.2"
+        d="M18 98 C22 72, 28 52, 48 42"
+        stroke="url(#cableBody)"
+        strokeWidth="14"
         strokeLinecap="round"
-        opacity="0.75"
+        fill="none"
       />
       <path
-        d="M28 28l8 8M84 84l8 8M84 28l-8 8M36 84l-8 8"
-        stroke="#F5D76E"
-        strokeWidth="2"
+        d="M18 98 C22 72, 28 52, 48 42"
+        stroke="#94a3b8"
+        strokeWidth="5"
         strokeLinecap="round"
-        opacity="0.8"
+        fill="none"
+        opacity="0.35"
       />
+      {/* Light inside the cable */}
+      <path
+        d="M20 96 C24 72, 30 54, 48 44"
+        stroke="url(#lightTrail)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        fill="none"
+        filter="url(#glow)"
+      />
+
+      {/* Cable end / tip facing camera */}
+      <circle cx="68" cy="40" r="28" fill="url(#jacket)" stroke="#F5D76E" strokeWidth="2.5" filter="url(#glow)" />
+      <circle cx="68" cy="40" r="21" fill="#1e293b" stroke="#475569" strokeWidth="2" />
+      <circle cx="68" cy="40" r="14" fill="#0b1728" stroke="#38BDF8" strokeWidth="2.2" />
+      <circle cx="68" cy="40" r="7" fill="url(#coreGlow)" filter="url(#glow)" />
+      <circle cx="68" cy="40" r="2.6" fill="#ffffff" />
+
+      {/* Small sparkles of optic light */}
+      <circle cx="92" cy="22" r="2" fill="#00E5FF" opacity="0.9" />
+      <circle cx="98" cy="34" r="1.4" fill="#F5D76E" opacity="0.85" />
+      <circle cx="88" cy="14" r="1.2" fill="#7DF9FF" opacity="0.7" />
     </svg>
   );
 }
